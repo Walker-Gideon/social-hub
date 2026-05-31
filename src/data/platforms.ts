@@ -1,0 +1,15 @@
+export const PLATFORMS = [
+  { id: 'youtube', label: 'YouTube', placeholder: 'https://youtube.com/@yourname' },
+  { id: 'instagram', label: 'Instagram', placeholder: 'https://instagram.com/yourname' },
+  { id: 'tiktok', label: 'TikTok', placeholder: 'https://tiktok.com/@yourname' },
+  { id: 'x', label: 'X (Twitter)', placeholder: 'https://x.com/yourname' },
+  { id: 'threads', label: 'Threads', placeholder: 'https://threads.net/@yourname' },
+  { id: 'linkedin', label: 'LinkedIn', placeholder: 'https://linkedin.com/in/yourname' },
+  { id: 'github', label: 'GitHub', placeholder: 'https://github.com/yourname' },
+  { id: 'facebook', label: 'Facebook', placeholder: 'https://facebook.com/yourname' },
+  { id: 'twitch', label: 'Twitch', placeholder: 'https://twitch.tv/yourname' },
+  { id: 'discord', label: 'Discord', placeholder: 'Discord Server/Username' },
+  { id: 'telegram', label: 'Telegram', placeholder: 'https://t.me/yourname' },
+  { id: 'whatsapp', label: 'WhatsApp', placeholder: 'Your phone number (with country code)' },
+  { id: 'email', label: 'Email', placeholder: 'your@email.com' },
+]
