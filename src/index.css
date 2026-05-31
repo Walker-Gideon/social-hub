@@ -1,1 +1,139 @@
 @import "tailwindcss";
+
+/*
+src/
+├── components/     ← UI building blocks only
+│   ├── layout/
+│   └── ui/
+├── pages/          ← route-level pages
+├── hooks/          ← custom React hooks
+├── context/        ← React context
+├── services/       ← API calls (TinyURL etc)
+├── data/           ← static data (platforms config)
+├── utils/          ← helper functions (encode/decode)
+└── api/            ← keep this, good for API logic
+*/
+
+@theme {
+    --color--background:: #242424;
+   
+    --shadow-sidebar: 12px 0 15px -3px rgba(0, 0, 0, 0.12), 4px 0 6px -2px rgba(0, 0, 0, 0.05);
+
+    /* Break-points */
+  --breakpoint-smallest: 300px;
+  --breakpoint-sm: 325px;
+  --breakpoint-medium: 650px;
+  --breakpoint-md: 768px;
+  --breakpoint-mid: 850px;
+  --breakpoint-midmax: 900px;
+  --breakpoint-lg: 1024px;
+}
+
+
+  body {
+  background-color: #242424;
+  color: white;
+    /* font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal; */
+  }
+
+  :root {
+  --background: #0a0a0f;
+  --foreground: #f0f0ff;
+  --card: #12121a;
+  --card-foreground: #f0f0ff;
+  --popover: #12121a;
+  --popover-foreground: #f0f0ff;
+  --primary: #7c6dfa;
+  --primary-foreground: #f0f0ff;
+  --secondary: #1a1a26;
+  --secondary-foreground: #f0f0ff;
+  --muted: #1a1a26;
+  --muted-foreground: #8888aa;
+  --accent: #a78bfa;
+  --accent-foreground: #f0f0ff;
+  --destructive: #ef4444;
+  --destructive-foreground: #f0f0ff;
+  --border: #ffffff14;
+  --input: #1a1a26;
+  --ring: #7c6dfa;
+  --chart-1: #7c6dfa;
+  --chart-2: #a78bfa;
+  --chart-3: #22223a;
+  --chart-4: #8888aa;
+  --chart-5: #f0f0ff;
+  --radius: 0.625rem;
+  --sidebar: #12121a;
+  --sidebar-foreground: #f0f0ff;
+  --sidebar-primary: #7c6dfa;
+  --sidebar-primary-foreground: #f0f0ff;
+  --sidebar-accent: #1a1a26;
+  --sidebar-accent-foreground: #f0f0ff;
+  --sidebar-border: #ffffff14;
+  --sidebar-ring: #7c6dfa;
+
+  /* SocialHub custom tokens */
+  --surface: #12121a;
+  --surface-2: #1a1a26;
+  --surface-3: #22223a;
+  --accent-primary: #7c6dfa;
+  --accent-secondary: #a78bfa;
+  --border-subtle: #ffffff14;
+  --border-visible: #ffffff22;
+  --text-primary: #f0f0ff;
+  --text-muted: #8888aa;
+}
+
+/* SocialHub is dark-first — no separate .dark class needed */
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
