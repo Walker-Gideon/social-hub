@@ -32,12 +32,12 @@ export default function HomePage() {
               <div className={"w-10 h-10 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center"}>
                 <span className={"text-white font-bold text-lg"}>@</span>
               </div>
-              <h1 className={"text-3xl md:text-4xl font-bold text-foreground"}>SocialHub</h1>
+              <h1 className={"text-3xl md:text-4xl font-bold text-foreground font-heading"}>SocialHub</h1>
             </div>
 
             {/* Content */}
             <div className={"space-y-4"}>
-              <h2 className={"text-balance text-3xl md:text-4xl font-bold tracking-tight text-foreground"}>
+              <h2 className={"text-balance text-3xl md:text-4xl font-bold tracking-tight text-foreground font-heading"}>
                 Share All Your Social Handles in One Place
               </h2>
               <p className={"text-lg text-muted-foreground max-w-lg mx-auto"}>
@@ -82,7 +82,7 @@ export default function HomePage() {
               {FEATURES.map((feature) => (
                 <div key={feature.title} className={"flex flex-col items-center space-y-2"}>
                   <div className={"text-2xl"}>{feature.icon}</div>
-                  <h3 className={"font-semibold text-foreground"}>{feature.title}</h3>
+                  <h3 className={"font-semibold text-foreground font-heading"}>{feature.title}</h3>
                   <p className={"text-sm text-muted-foreground"}>{feature.description}</p>
                 </div>
               ))}
