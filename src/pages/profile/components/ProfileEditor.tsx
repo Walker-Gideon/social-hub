@@ -1,16 +1,17 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { ArrowLeft, Plus, X as XIcon } from 'lucide-react'
 
 import Loader from '../../../component/ui/Loader'
-import { PLATFORMS } from '../../../data/platforms'
-
-import type { SocialLink } from '../../../component/ui/SocialLinkButton'
 import { SocialLinkButton } from '../../../component/ui/SocialLinkButton'
 
+import { PLATFORMS, getPlatform } from '../../../data/platforms'
+import type { SocialLink } from '../../../component/ui/SocialLinkButton'
+import { buildShareableURL, decodeFromHash } from '../../../utils/encode'
+
 export default function ProfileEditor({ username }: { username: string }) {
+    const navigate = useNavigate();
     const [bio, setBio] = useState("");
-    const [saved, setSaved] = useState(false);
     const [loading, setLoading] = useState(true);
     const [displayName, setDisplayName] = useState("");
     const [links, setLinks] = useState<SocialLink[]>([]);
@@ -19,45 +20,29 @@ export default function ProfileEditor({ username }: { username: string }) {
     useEffect(() => {
         if(!username) return;
         
-        const storageKey = `profile_${username}`;
-        const saved = localStorage.getItem(storageKey);
+        const decoded = decodeFromHash(window.location.hash);
 
-        if (saved) {
-            try {
-                const data = JSON.parse(saved);
-                setDisplayName(data.displayName || "");
-                setBio(data.bio || "");
-                setLinks(data.links || []);
-            } catch (error) {
-                console.error('Error loading profile:', error);
-            }
-        }
+        if(decoded && decoded.username == username) {
+            setDisplayName(decoded.displayName || "");
+            setBio(decoded.bio || "");
+            setLinks(decoded.links || []);
+        } 
         setLoading(false);
     }, [username])
 
     const saveProfile = () => {
-        const storageKey = `profile_${username}`;
-        localStorage.setItem(
-            storageKey,
-            JSON.stringify({
-                displayName,
-                bio,
-                links,
-            })
-        );
-        setSaved(true);
-        setTimeout(() => setSaved(false), 2000);
+        const url = buildShareableURL({username, displayName, bio, links});
+        sessionStorage.setItem("socialhub_owner", username);
+        navigate(`/profile/${username}${url.split(`/profile/${username}`)[1]}`);
     }
 
     const addLink = () => {
         if (!newLink.url.trim()) return;
 
         const link: SocialLink = {
-            id: Math.random().toString(36).substr(2, 9),
+            id: crypto.randomUUID(),
             platform: newLink.platform,
-            url: newLink.url,
-            icon: '',
-            color: '',
+            url: newLink.url.trim()
         };
 
         setLinks([...links, link]);
@@ -75,7 +60,9 @@ export default function ProfileEditor({ username }: { username: string }) {
             <div className={"w-full max-w-2xl mx-auto"}>
                 {/* Header */}
                 <div className={"flex items-center gap-4 mb-8"}>
-                    <Link to={`/profile/${username}`} className={"inline-flex items-center gap-2 text-primary hover:underline"}>
+                    <Link 
+                        to={`/profile/${username}`} 
+                        className={"inline-flex items-center gap-2 text-primary hover:underline"}>
                         <ArrowLeft className={"w-4 h-4"} />
                         Back to Profile
                     </Link>
@@ -129,10 +116,8 @@ export default function ProfileEditor({ username }: { username: string }) {
                                     type="text"
                                     value={newLink.url}
                                     onChange={(e) => setNewLink({ ...newLink, url: e.target.value })}
-                                    placeholder={
-                                        PLATFORMS.find((p) => p.id === newLink.platform)?.placeholder || 'Enter URL'
-                                    }
-                                    onKeyPress={(e) => {
+                                    placeholder={getPlatform(newLink.platform).placeholder}
+                                    onKeyDown={(e) => {
                                         if (e.key === 'Enter') {
                                             addLink()
                                         }
@@ -158,7 +143,7 @@ export default function ProfileEditor({ username }: { username: string }) {
                                 {links.map((link) => (
                                     <div key={link.id} className={"flex items-center justify-between bg-background p-4 rounded-lg border border-border"}>
                                         <span className={"text-foreground font-medium"}>
-                                            {PLATFORMS.find((p) => p.id === link.platform)?.label || link.platform}
+                                            {getPlatform(link.platform).label}
                                         </span>
                                         <div className={"flex items-center gap-3 overflow-x-hidden"}>
                                             <span className={"text-sm text-muted-foreground truncate max-w-xs"}>{link.url}</span>
@@ -181,7 +166,7 @@ export default function ProfileEditor({ username }: { username: string }) {
                             onClick={saveProfile}
                             className={"flex-1 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity flex-wrap"}
                         >
-                            {saved ? '✓ Saved!' : 'Save Profile'}
+                            Save & View Profile
                         </button>
                         <Link
                             to={`/profile/${username}`}
@@ -194,11 +179,13 @@ export default function ProfileEditor({ username }: { username: string }) {
 
                 {/* Preview */}
                 <div className={"mt-12"}>
-                    <h2 className={"text-2xl font-bold text-foreground mb-6"}>Preview</h2>
+                    <h2 className={"text-2xl font-bold text-foreground mb-6 font-heading"}>Preview</h2>
                     <div className={"bg-card border border-border rounded-xl p-8"}>
                         <div className={"flex flex-col items-center gap-6"}>
                             <div className={"w-20 h-20 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg"}>
-                                <span className={"text-4xl font-bold text-white"}>{username.charAt(0).toUpperCase()}</span>
+                                <span className={"text-4xl font-bold text-white"}>
+                                    {(displayName || username).charAt(0).toUpperCase()}
+                                </span>
                             </div>
                             <div className={"text-center"}>
                                 <h3 className={"text-2xl font-bold text-foreground font-heading"}>{displayName || username}</h3>
