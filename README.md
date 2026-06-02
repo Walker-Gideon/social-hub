@@ -27,7 +27,7 @@ SocialHub lets you create a personal link hub and share it with your followers. 
 ## Getting Started
 
 ```bash
-git clone https://github.com/Walker-Gideon/socialhub.git
+git clone https://github.com/Walker-Gideon/social-hub.git
 cd socialhub
 npm install
 npm run dev
