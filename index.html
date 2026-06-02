@@ -4,11 +4,39 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&display=swap" rel="stylesheet">
-    
-    <title>Social Hub</title>
+
+    <!-- SEO -->
+    <meta name="description" content="SocialHub — share all your social profiles in one link. Free, instant, no sign-up required." />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph (WhatsApp, Twitter, LinkedIn previews) -->
+    <meta property="og:title" content="SocialHub" />
+    <meta property="og:description" content="Share all your social profiles in one link. Free, instant, no sign-up required." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://socialhub.vercel.app" />
+
+    <!-- Fonts: preconnect first, then load async to avoid render-blocking -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&display=swap"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&display=swap"
+      />
+    </noscript>
+
+    <title>SocialHub — One Link for All Your Socials</title>
   </head>
   <body>
     <div id="root"></div>

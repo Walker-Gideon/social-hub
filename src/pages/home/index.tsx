@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 
 const FEATURES = [
@@ -69,23 +69,6 @@ export default function HomePage() {
                   Get Started
                   <ArrowRight className="w-4 h-4" />
                 </button>
-
-                {/* <Link
-                  to={username ? `/profile/${username}` : '#'}
-                  onClick={(e) => {
-                    if (!username) {
-                      e.preventDefault()
-                    }
-                  }}
-                  className={`px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all whitespace-nowrap ${
-                    username
-                      ? 'bg-primary text-primary-foreground hover:opacity-90'
-                      : 'bg-muted text-muted-foreground cursor-not-allowed'
-                  }`}
-                >
-                  Get Started
-                  <ArrowRight className={"w-4 h-4"} />
-                </Link> */}
               </div>
               <p className={"text-xs text-muted-foreground"}>
                 No sign up required. Create your profile instantly.

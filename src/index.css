@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+/* @theme {
   --breakpoint-smallest: 300px;
   --breakpoint-sm: 325px;
   --breakpoint-medium: 650px;
@@ -8,7 +8,7 @@
   --breakpoint-mid: 850px;
   --breakpoint-midmax: 900px;
   --breakpoint-lg: 1024px;
-}
+} */
 
 body {
   background-color: #242424;
